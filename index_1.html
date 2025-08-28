@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎂</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen">
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+  <source src="happy-birthday-song.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Music Control Button -->
+<button id="music-btn"
+        onclick="toggleMusic()" 
+        class="fixed top-4 right-4 bg-pink-500 text-white px-4 py-2 rounded-full shadow hover:bg-pink-600">
+  🎵 Play
+</button>
+
+<script>
+  const music = document.getElementById("bg-music");
+  const btn = document.getElementById("music-btn");
+
+  // Enable autoplay after first click/tap
+  document.addEventListener("click", () => {
+    if (music.paused) {
+      music.play().then(() => {
+        btn.innerText = "🎵 Pause";
+      }).catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
+    }
+  }, { once: true });
+
+  // Toggle button
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+      btn.innerText = "🎵 Pause";
+    } else {
+      music.pause();
+      btn.innerText = "🎵 Play";
+    }
+  }
+</script>
+
+
+
+<style>
+  .balloon {
+    position: absolute;
+    bottom: -120px;
+    width: 60px;
+    height: 80px;
+    background: pink;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.2; /* watermark effect */
+    animation: float 12s infinite ease-in;
+    z-index: -1; /* send to background */
+  }
+
+  .balloon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -100px;
+    width: 2px;
+    height: 100px;
+    background: rgba(0,0,0,0.1); /* faint gray thread */
+    transform: translateX(-50%);
+  }
+
+  @keyframes float {
+    0%   { transform: translateY(0) scale(1); opacity: 0.2; }
+    50%  { opacity: 0.15; }
+    100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+  }
+</style>
+<!-- Balloons (background watermark) -->
+<div class="balloon" style="left: 5%; background: pink; animation-duration: 14s;"></div>
+<div class="balloon" style="left: 15%; background: lightblue; animation-duration: 17s;"></div>
+<div class="balloon" style="left: 25%; background: purple; animation-duration: 19s;"></div>
+<div class="balloon" style="left: 35%; background: yellow; animation-duration: 22s;"></div>
+<div class="balloon" style="left: 45%; background: lightgreen; animation-duration: 20s;"></div>
+<div class="balloon" style="left: 55%; background: orange; animation-duration: 16s;"></div>
+<div class="balloon" style="left: 65%; background: violet; animation-duration: 18s;"></div>
+<div class="balloon" style="left: 75%; background: skyblue; animation-duration: 21s;"></div>
+<div class="balloon" style="left: 85%; background: red; animation-duration: 23s;"></div>
+<div class="balloon" style="left: 95%; background: teal; animation-duration: 25s;"></div>
+
+
+
+  <div class="text-center p-6 max-w-lg bg-white shadow-xl rounded-2xl">
+    <h1 class="text-4xl font-bold text-pink-600">🎉 Happy Birthday, MAHI! 🎉</h1>
+    <p class="mt-4 text-lg text-gray-600">Click below to see wishes from your loved ones 💕</p>
+    <a href="page1.html" class="mt-6 inline-block bg-pink-500 text-white px-6 py-3 rounded-xl shadow hover:bg-pink-600 transition">
+      See Wishes 🎁
+    </a>
+  </div>
+<!-- Confetti Animation -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // Burst confetti on page load
+  confetti({
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
+
+  // Keep small confetti bursts every 3 seconds 🎉
+  setInterval(() => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }, 3000);
+</script>
+
+</body>
+</html>
