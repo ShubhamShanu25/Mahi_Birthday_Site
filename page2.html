@@ -5,16 +5,236 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Wishes - Page 2</title>
   <script src="https://cdn.tailwindcss.com"></script>
+	
+<style>
+    /* --- Balloons --- */
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50% 50% 50% 50%;
+      opacity: 0.2;
+      animation: float 12s infinite ease-in;
+      z-index: -1;
+    }
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -100px;
+      width: 2px;
+      height: 100px;
+      background: rgba(0,0,0,0.1);
+      transform: translateX(-50%);
+    }
+    @keyframes float {
+      0%   { transform: translateY(0) scale(1); opacity: 0.2; }
+      100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+
+    /* --- Sparkles --- */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: twinkle 3s infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(0.8); }
+      to { opacity: 0.8; transform: scale(1.5); }
+    }
+
+    /* --- Background Slideshow --- */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -3; /* behind balloons, sparkles, fireworks */
+      overflow: hidden;
+    }
+
+    .slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      animation: fade 32s infinite;
+    }
+
+    .slideshow img:nth-child(1) { animation-delay: 0s; }
+    .slideshow img:nth-child(2) { animation-delay: 8s; }
+    .slideshow img:nth-child(3) { animation-delay: 16s; }
+    .slideshow img:nth-child(4) { animation-delay: 24s; }
+
+    @keyframes fade {
+      0%   { opacity: 0; }
+      10%  { opacity: 0.4; }  /* watermark-like */
+      25%  { opacity: 0.4; }
+      35%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+</style>
 </head>
-<body class="bg-gradient-to-r from-purple-200 via-pink-200 to-yellow-200 min-h-screen flex items-center justify-center">
-  <div class="bg-white shadow-lg rounded-2xl p-6 max-w-lg text-center">
-    <img src="images/friend2.jpg" alt="Friend 2 with Birthday Girl" class="w-48 h-48 object-cover mx-auto rounded-full shadow-md">
-    <h2 class="mt-4 text-2xl font-bold text-purple-600">From: Buddy 🎉</h2>
-    <p class="mt-3 text-gray-700">Happy Birthday [Name]! May your day be filled with laughter, surprises, and lots of cake 🎂🎁</p>
+<body class="min-h-screen flex items-center justify-center">
+
+<!-- Background Slideshow -->
+<div class="slideshow">
+  <img src="Images/Pakhi_img2.jpg" alt="">
+  <img src="Images/Pakhi_img3.jpg" alt="">
+  <img src="Images/Pakhi_img4.jpg" alt="">
+  <img src="Images/Pakhi_img5.jpg" alt="">
+  <img src="Images/Pakhi_img6.jpg" alt="">
+  <img src="Images/Pakhi_img7.jpg" alt="">
+  <img src="Images/Pakhi_img8.jpg" alt="">
+  <img src="Images/Pakhi_img9.jpg" alt="">
+</div>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+  <source src="happy-birthday-song.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Music Control Button -->
+<button id="music-btn"
+        onclick="toggleMusic()" 
+        class="fixed top-4 right-4 bg-pink-500 text-white px-4 py-2 rounded-full shadow hover:bg-pink-600">
+  🎵 Play
+</button>
+
+<script>
+  const music = document.getElementById("bg-music");
+  const btn = document.getElementById("music-btn");
+
+  document.addEventListener("click", () => {
+    if (music.paused) {
+      music.play().then(() => {
+        btn.innerText = "🎵 Pause";
+      }).catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
+    }
+  }, { once: true });
+
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+      btn.innerText = "🎵 Pause";
+    } else {
+      music.pause();
+      btn.innerText = "🎵 Play";
+    }
+  }
+</script>
+
+<!-- Balloons -->
+<div class="balloon" style="left: 5%; background:pink; animation-duration:14s;"></div>
+<div class="balloon" style="left: 15%; background:lightblue; animation-duration:17s;"></div>
+<div class="balloon" style="left: 25%; background:purple; animation-duration:19s;"></div>
+<div class="balloon" style="left: 35%; background:yellow; animation-duration:22s;"></div>
+<div class="balloon" style="left: 45%; background:lightgreen; animation-duration:20s;"></div>
+<div class="balloon" style="left: 55%; background:orange; animation-duration:16s;"></div>
+<div class="balloon" style="left: 65%; background:violet; animation-duration:18s;"></div>
+<div class="balloon" style="left: 75%; background:skyblue; animation-duration:21s;"></div>
+<div class="balloon" style="left: 85%; background:red; animation-duration:23s;"></div>
+<div class="balloon" style="left: 95%; background:teal; animation-duration:25s;"></div>
+
+<!-- Sparkles -->
+<div class="sparkle" style="top:10%; left:20%; animation-duration:2s;"></div>
+<div class="sparkle" style="top:40%; left:60%; animation-duration:3s;"></div>
+<div class="sparkle" style="top:70%; left:30%; animation-duration:4s;"></div>
+<div class="sparkle" style="top:80%; left:80%; animation-duration:5s;"></div>
+<div class="sparkle" style="top:20%; left:50%; animation-duration:3.5s;"></div>
+
+
+<!-- Birthday Card -->
+<div class="bg-white shadow-lg rounded-2xl p-6 max-w-3xl flex items-center gap-6 relative z-10">
+  <!-- Left Side: Image -->
+  <div class="w-1/2">
+    <img src="Images/Pakhi_img1.jpg" alt="Friend 2 with Birthday Girl"
+         class="w-full h-80 object-cover rounded-xl shadow-md">
+  </div>
+
+  <!-- Right Side: Text -->
+  <div class="w-1/2 text-left">
+    <h2 class="mt-4 text-2xl font-bold text-purple-600">From: Pakhi ❤️</h2>
+    <p class="mt-4 text-gray-700 leading-relaxed">
+      Hmm.. I was told to write something special but that's not how it works between us.. Our telepathy must have already told you whatever it's there to say hehe 👁️👄👁️
+saeng-il chukhahae shibal saekkiya 😌
+    </p>
+
     <div class="mt-6 flex justify-between">
       <a href="page1.html" class="text-purple-500 hover:underline">⬅ Back</a>
-      <a href="page3.html" class="text-purple-500 hover:underline">Next ➡</a>
+      <a href="page3.html" class="text-pink-500 hover:underline">Next ➡</a>
     </div>
   </div>
+</div>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+  setInterval(() => {
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.8 } });
+  }, 3000);
+</script>
+
+<!-- Fireworks -->
+<canvas id="fireworks" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;"></canvas>
+<script>
+  const canvas = document.getElementById("fireworks");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth; canvas.height = innerHeight;
+  let particles = [];
+
+  function firework(x,y,color) {
+    for (let i=0;i<50;i++) {
+      particles.push({
+        x, y,
+        angle: Math.random() * 2 * Math.PI,
+        speed: Math.random() * 5 + 2,
+        radius: 2,
+        life: 100,
+        color
+      });
+    }
+  }
+  function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.life--;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+      ctx.fill();
+      if (p.life<=0) particles.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  setInterval(() => {
+    firework(Math.random()*canvas.width, Math.random()*canvas.height/2,
+      `hsl(${Math.random()*360},100%,50%)`);
+  }, 2000);
+</script>
+
 </body>
 </html>
