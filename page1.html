@@ -47,9 +47,77 @@
       from { opacity: 0.2; transform: scale(0.8); }
       to { opacity: 0.8; transform: scale(1.5); }
     }
-  </style>
+
+    /* Background Dynamic Styles */
+    #dynamic-bg {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:-3;
+      overflow:hidden;
+      pointer-events:none;
+    }
+    .single-bg {
+      width:100%; height:100%;
+      background-size:cover;
+      background-position:center;
+      filter: blur(4px) brightness(0.7);
+    }
+    .corner-bg {
+      position:absolute;
+      width:300px;
+      opacity:0.15;
+    }
+    .corner-bg.left { bottom:10%; left:10%; }
+    .corner-bg.right { top:10%; right:10%; }
+    .slideshow img {
+      position:absolute;
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:0;
+      animation: fade 32s infinite;
+    }
+    @keyframes fade {
+      0%   { opacity: 0; }
+      10%  { opacity: 0.4; }
+      25%  { opacity: 0.4; }
+      35%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+</style>
 </head>
-<body class="bg-gradient-to-r from-pink-200 via-purple-200 to-pink-300 min-h-screen flex items-center justify-center">
+<body class="min-h-screen flex items-center justify-center">
+
+<!-- Dynamic Background -->
+  <div id="dynamic-bg"></div>
+
+  <script>
+    // Background images
+    const bgImages = [
+      "Images/Shanu_img2.jpg",
+	"Images/Shanu_img3.jpg"
+    ];
+
+    const bgContainer = document.getElementById("dynamic-bg");
+
+    if (bgImages.length === 1) {
+      bgContainer.innerHTML = `<div class="single-bg" 
+        style="background-image:url('${bgImages[0]}')"></div>`;
+    } 
+    else if (bgImages.length === 2) {
+      bgContainer.innerHTML = `
+        <img src="${bgImages[0]}" class="corner-bg left">
+        <img src="${bgImages[1]}" class="corner-bg right">
+      `;
+    } 
+    else if (bgImages.length >= 3) {
+      bgContainer.classList.add("slideshow");
+      bgContainer.innerHTML = bgImages.map((img,i) => 
+        `<img src="${img}" style="animation-delay:${i*8}s">`
+      ).join("");
+    }
+  </script>
+
 <!-- Background Music -->
 <audio id="bg-music" loop>
   <source src="happy-birthday-song.mp3" type="audio/mpeg">
@@ -67,7 +135,6 @@
   const music = document.getElementById("bg-music");
   const btn = document.getElementById("music-btn");
 
-  // Enable autoplay after first click/tap
   document.addEventListener("click", () => {
     if (music.paused) {
       music.play().then(() => {
@@ -78,7 +145,6 @@
     }
   }, { once: true });
 
-  // Toggle button
   function toggleMusic() {
     if (music.paused) {
       music.play();
@@ -90,32 +156,31 @@
   }
 </script>
 
-  <!-- Balloons -->
-  <div class="balloon" style="left: 5%; background:pink; animation-duration:14s;"></div>
-  <div class="balloon" style="left: 15%; background:lightblue; animation-duration:17s;"></div>
-  <div class="balloon" style="left: 25%; background:purple; animation-duration:19s;"></div>
-  <div class="balloon" style="left: 35%; background:yellow; animation-duration:22s;"></div>
-  <div class="balloon" style="left: 45%; background:lightgreen; animation-duration:20s;"></div>
-  <div class="balloon" style="left: 55%; background:orange; animation-duration:16s;"></div>
-  <div class="balloon" style="left: 65%; background:violet; animation-duration:18s;"></div>
-  <div class="balloon" style="left: 75%; background:skyblue; animation-duration:21s;"></div>
-  <div class="balloon" style="left: 85%; background:red; animation-duration:23s;"></div>
-  <div class="balloon" style="left: 95%; background:teal; animation-duration:25s;"></div>
+<!-- Balloons -->
+<div class="balloon" style="left: 5%; background:pink; animation-duration:14s;"></div>
+<div class="balloon" style="left: 15%; background:lightblue; animation-duration:17s;"></div>
+<div class="balloon" style="left: 25%; background:purple; animation-duration:19s;"></div>
+<div class="balloon" style="left: 35%; background:yellow; animation-duration:22s;"></div>
+<div class="balloon" style="left: 45%; background:lightgreen; animation-duration:20s;"></div>
+<div class="balloon" style="left: 55%; background:orange; animation-duration:16s;"></div>
+<div class="balloon" style="left: 65%; background:violet; animation-duration:18s;"></div>
+<div class="balloon" style="left: 75%; background:skyblue; animation-duration:21s;"></div>
+<div class="balloon" style="left: 85%; background:red; animation-duration:23s;"></div>
+<div class="balloon" style="left: 95%; background:teal; animation-duration:25s;"></div>
 
-  <!-- Sparkles (random stars) -->
-  <div class="sparkle" style="top:10%; left:20%; animation-duration:2s;"></div>
-  <div class="sparkle" style="top:40%; left:60%; animation-duration:3s;"></div>
-  <div class="sparkle" style="top:70%; left:30%; animation-duration:4s;"></div>
-  <div class="sparkle" style="top:80%; left:80%; animation-duration:5s;"></div>
-  <div class="sparkle" style="top:20%; left:50%; animation-duration:3.5s;"></div>
+<!-- Sparkles -->
+<div class="sparkle" style="top:10%; left:20%; animation-duration:2s;"></div>
+<div class="sparkle" style="top:40%; left:60%; animation-duration:3s;"></div>
+<div class="sparkle" style="top:70%; left:30%; animation-duration:4s;"></div>
+<div class="sparkle" style="top:80%; left:80%; animation-duration:5s;"></div>
+<div class="sparkle" style="top:20%; left:50%; animation-duration:3.5s;"></div>
 
- 
 
-  <!-- Birthday Card -->
+<!-- Birthday Card -->
 <div class="bg-white shadow-lg rounded-2xl p-6 max-w-3xl flex items-center gap-6 relative z-10">
   <!-- Left Side: Image -->
   <div class="w-1/2">
-    <img src="Images/Shanu_img1.jpg" alt="Friend 2 with Birthday Girl"
+    <img src="Images/Shanu_img1.jpg" alt="Shubham with Birthday Girl"
          class="w-full h-80 object-cover rounded-xl shadow-md">
   </div>
 
@@ -123,67 +188,65 @@
   <div class="w-1/2 text-left">
     <h2 class="mt-4 text-2xl font-bold text-pink-600">From: Shubham ❤️</h2>
     <p class="mt-4 text-gray-700 leading-relaxed">
-      Happy Birthday, Mahi! You bring so much joy into our lives.  
-      Wishing you laughter, love, and endless happiness today and always 💐🎂
+      Happiest Birthday to the most special person in my life! ❤️🎉🎂 You know Mujhe feelings express krni nhi aati but I am very very excited for your bday 🥳🤩 and Today is about celebrating you, the incredible woman who makes every moment brighter. 💃🎉Jaise abhi muskura rahi ho waise hi zindagi bhar muskurate rehna ☺️.... and dw you have earned the lifetime subscription of my gossip, fighting, annoying and many more 🤩😝 But I cherish you more than words can say. Life's sweeter with you in it, and I can't wait for another year of adventures together. ☺️😍 And I wish you a lifetime of happiness and good health 💞😇
     </p>
 
-    <div class="mt-6 flex justify-between">    
+    <div class="mt-6 flex justify-between">
       <a href="index.html" class="text-pink-500 hover:underline">⬅ Home</a>
       <a href="page2.html" class="text-pink-500 hover:underline">Next ➡</a>
     </div>
   </div>
 </div>
 
- <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
-    // Burst confetti on load
-    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-    setInterval(() => {
-      confetti({ particleCount: 80, spread: 70, origin: { y: 0.8 } });
-    }, 3000);
-  </script>
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+  setInterval(() => {
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.8 } });
+  }, 3000);
+</script>
 
-  <!-- Fireworks -->
-  <canvas id="fireworks" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;"></canvas>
-  <script>
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
-    canvas.width = innerWidth; canvas.height = innerHeight;
-    let particles = [];
+<!-- Fireworks -->
+<canvas id="fireworks" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;"></canvas>
+<script>
+  const canvas = document.getElementById("fireworks");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth; canvas.height = innerHeight;
+  let particles = [];
 
-    function firework(x,y,color) {
-      for (let i=0;i<50;i++) {
-        particles.push({
-          x, y,
-          angle: Math.random() * 2 * Math.PI,
-          speed: Math.random() * 5 + 2,
-          radius: 2,
-          life: 100,
-          color
-        });
-      }
-    }
-    function animate() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach((p,i) => {
-        p.x += Math.cos(p.angle) * p.speed;
-        p.y += Math.sin(p.angle) * p.speed;
-        p.life--;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-        ctx.fill();
-        if (p.life<=0) particles.splice(i,1);
+  function firework(x,y,color) {
+    for (let i=0;i<50;i++) {
+      particles.push({
+        x, y,
+        angle: Math.random() * 2 * Math.PI,
+        speed: Math.random() * 5 + 2,
+        radius: 2,
+        life: 100,
+        color
       });
-      requestAnimationFrame(animate);
     }
-    animate();
-    setInterval(() => {
-      firework(Math.random()*canvas.width, Math.random()*canvas.height/2,
-        `hsl(${Math.random()*360},100%,50%)`);
-    }, 2000);
-  </script>
+  }
+  function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.life--;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+      ctx.fill();
+      if (p.life<=0) particles.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  setInterval(() => {
+    firework(Math.random()*canvas.width, Math.random()*canvas.height/2,
+      `hsl(${Math.random()*360},100%,50%)`);
+  }, 2000);
+</script>
+
 </body>
 </html>
-a
