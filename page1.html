@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Wishes - Page 1</title>
-  <script src="https://cdn.tailwindcss.com"></script> 
-	
-<style>
-    /* --- Balloons --- */
+  <title>For Our Birthday Queen 🎂💖</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+   /* --- Balloons --- */
     .balloon {
       position: absolute;
       bottom: -120px;
@@ -33,7 +32,38 @@
       100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
     }
 
-    /* --- Sparkles --- */
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 6s infinite ease-in;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      from { transform: translateY(0) rotate(45deg); opacity: 0.7; }
+      to { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+  /* --- Sparkles --- */
     .sparkle {
       position: absolute;
       width: 4px;
@@ -84,18 +114,19 @@
       35%  { opacity: 0; }
       100% { opacity: 0; }
     }
-</style>
+  </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
-
-<!-- Dynamic Background -->
+  <!-- Dynamic Background -->
   <div id="dynamic-bg"></div>
 
   <script>
     // Background images
     const bgImages = [
-      "Images/Shanu_img2.jpg",
-	"Images/Shanu_img3.jpg"
+      "Images/Mahi_img2.jpg"
+,"Images/Mahi_img5.jpg"
+,"Images/Mahi_img7.jpg"
+,"Images/Mahi_img8.jpg"
     ];
 
     const bgContainer = document.getElementById("dynamic-bg");
@@ -117,6 +148,7 @@
       ).join("");
     }
   </script>
+
 
 <!-- Background Music -->
 <audio id="bg-music" loop>
@@ -175,25 +207,40 @@
 <div class="sparkle" style="top:80%; left:80%; animation-duration:5s;"></div>
 <div class="sparkle" style="top:20%; left:50%; animation-duration:3.5s;"></div>
 
+  <!-- Floating Hearts -->
+  <div class="heart" style="left:10%; animation-duration:7s;"></div>
+  <div class="heart" style="left:30%; animation-duration:9s;"></div>
+  <div class="heart" style="left:50%; animation-duration:6s;"></div>
+  <div class="heart" style="left:70%; animation-duration:8s;"></div>
+  <div class="heart" style="left:90%; animation-duration:10s;"></div>
 
-<!-- Birthday Card -->
+
+
+  <!-- Birthday Card -->
 <div class="bg-white shadow-lg rounded-2xl p-6 max-w-3xl flex items-center gap-6 relative z-10">
   <!-- Left Side: Image -->
   <div class="w-1/2">
-    <img src="Images/Shanu_img1.jpg" alt="Shubham with Birthday Girl"
+    <img src="Images/img1.jpg" alt="Javed with Birthday Girl"
          class="w-full h-80 object-cover rounded-xl shadow-md">
   </div>
 
   <!-- Right Side: Text -->
   <div class="w-1/2 text-left">
-    <h2 class="mt-4 text-2xl font-bold text-pink-600">From: Shubham ❤️</h2>
-    <p class="mt-4 text-gray-700 leading-relaxed">
-      Happiest Birthday to the most special person in my life! ❤️🎉🎂 You know Mujhe feelings express krni nhi aati but I am very very excited for your bday 🥳🤩 and Today is about celebrating you, the incredible woman who makes every moment brighter. 💃🎉Jaise abhi muskura rahi ho waise hi zindagi bhar muskurate rehna ☺️.... and dw you have earned the lifetime subscription of my gossip, fighting, annoying and many more 🤩😝 But I cherish you more than words can say. Life's sweeter with you in it, and I can't wait for another year of adventures together. ☺️😍 And I wish you a lifetime of happiness and good health 💞😇
+    <h1 class="mt-6 text-3xl font-bold text-pink-600">🌸Birthday Queen🌸</h1>
+    <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+      Dear <span class="font-bold text-pink-500">Mahi</span>,  
+      you are the heart of every celebration, the reason behind every smile,  
+      and the sparkle in our lives. 💕  
+      Today is all about <span class="font-semibold">YOU</span> – your laughter, your kindness, and the love you spread.  
+      May your year ahead be filled with endless happiness, surprises, and success! 🎉✨
     </p>
 
     <div class="mt-6 flex justify-between">
-      <a href="index.html" class="text-pink-500 hover:underline">⬅ Home</a>
-      <a href="page2.html" class="text-pink-500 hover:underline">Next ➡</a>
+      <a href="index.html" class="text-purple-500 hover:underline">⬅ Back</a>
+      <a href="page2.html" 
+       class="mt-8 inline-block bg-pink-500 text-white px-6 py-3 rounded-xl shadow hover:bg-pink-600 transition">
+      💌 See Birthday Wishes
+    </a>
     </div>
   </div>
 </div>
@@ -247,6 +294,5 @@
       `hsl(${Math.random()*360},100%,50%)`);
   }, 2000);
 </script>
-
 </body>
 </html>
