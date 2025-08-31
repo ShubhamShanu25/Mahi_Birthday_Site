@@ -49,46 +49,49 @@
     }
 
     /* --- Background Slideshow --- */
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    .slideshow {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -3; /* behind balloons, sparkles, fireworks */
-      overflow: hidden;
-    }
+.slideshow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -3; /* behind balloons, sparkles, fireworks */
+  overflow: hidden;
+}
 
-    .slideshow img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      animation: fade 32s infinite;
-    }
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fade 36s infinite; /* 6 images × 6s each */
+}
 
-    .slideshow img:nth-child(1) { animation-delay: 0s; }
-    .slideshow img:nth-child(2) { animation-delay: 8s; }
-    .slideshow img:nth-child(3) { animation-delay: 16s; }
-    .slideshow img:nth-child(4) { animation-delay: 24s; }
+/* Image delays (6 images) */
+.slideshow img:nth-child(1) { animation-delay: 0s; }
+.slideshow img:nth-child(2) { animation-delay: 6s; }
+.slideshow img:nth-child(3) { animation-delay: 12s; }
+.slideshow img:nth-child(4) { animation-delay: 18s; }
+.slideshow img:nth-child(5) { animation-delay: 24s; }
+.slideshow img:nth-child(6) { animation-delay: 30s; }
 
-    @keyframes fade {
-      0%   { opacity: 0; }
-      10%  { opacity: 0.4; }  /* watermark-like */
-      25%  { opacity: 0.4; }
-      35%  { opacity: 0; }
-      100% { opacity: 0; }
-    }
+@keyframes fade {
+  0%   { opacity: 0; }
+  8%   { opacity: 0.4; }  /* fade in */
+  20%  { opacity: 0.4; }  /* stay visible */
+  28%  { opacity: 0; }    /* fade out */
+  100% { opacity: 0; }
+}
 </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
@@ -100,9 +103,8 @@
   <img src="Images/Pakhi_img4.jpg" alt="">
   <img src="Images/Pakhi_img5.jpg" alt="">
   <img src="Images/Pakhi_img6.jpg" alt="">
-  <img src="Images/Pakhi_img7.jpg" alt="">
   <img src="Images/Pakhi_img8.jpg" alt="">
-  <img src="Images/Pakhi_img9.jpg" alt="">
+
 </div>
 
 <!-- Background Music -->
